@@ -8,6 +8,7 @@ import axios from 'axios'
 
 // CSS Entry
 import '@/assets/css/main.css'
+import 'vue-slider-component/theme/default.css'
 
 Vue.config.productionTip = false
 Vue.prototype.http = axios.create({ baseURL: process.env.VUE_APP_API_URL })

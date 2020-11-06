@@ -10,10 +10,12 @@
   "dependencies": {
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "moment-timezone": "^0.5.31",
     "register-service-worker": "^1.7.1",
     "tailwindcss": "^1.9.6",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue-slider-component": "^3.2.10",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
