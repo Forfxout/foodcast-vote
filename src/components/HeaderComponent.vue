@@ -5,10 +5,10 @@
         <img width="194" height="68" src="../assets/images/food-logo.png" alt="">
       </div>
       <div class="flex flex-col items-center px-16" style="font-size: 28px">
-        <div class="font-bold p-4">
+        <div class="text-5xl p-4">
           Every week we launch a game
         </div>
-        <div class="text-center">
+        <div class="text-center text-3xl font-medium">
           when we choose six dishes that famous restaurants provide us exclusively. Whenever somebody places an order,
           the price drops in real-time. The more you order - the lower the price for all buyers (and for previous ones
           too)!
@@ -17,7 +17,7 @@
       <div>
         <CounterComponent/>
       </div>
-      <button>Start playing</button>
+      <button class="font-bold" v-scroll-to="'#chooseDishes'">Start playing</button>
     </div>
   </div>
 </template>
@@ -54,5 +54,4 @@ button
   border-radius: 100px
   width: 240px
   height: 60px
-  font-size: 17px
 </style>

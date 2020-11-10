@@ -6,7 +6,7 @@
         {{ title }}
       </div>
       <div></div>
-      <div class="text-xl">
+      <div class="text-xl font-medium">
         {{ description }}
       </div>
     </div>

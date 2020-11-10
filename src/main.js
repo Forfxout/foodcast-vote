@@ -5,6 +5,12 @@ import router from './router'
 import store from './store'
 
 import axios from 'axios'
+import VueScrollTo from 'vue-scrollto'
+import Transitions from 'vue2-transitions'
+import Vuelidate from 'vuelidate'
+import VueMask from 'v-mask'
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm'
+import { ValidationObserver } from 'vee-validate'
 
 // CSS Entry
 import '@/assets/css/main.css'
@@ -12,6 +18,13 @@ import 'vue-slider-component/theme/default.css'
 
 Vue.config.productionTip = false
 Vue.prototype.http = axios.create({ baseURL: process.env.VUE_APP_API_URL })
+Vue.use(VueScrollTo)
+Vue.use(Transitions)
+Vue.use(Vuelidate)
+Vue.use(VueMask)
+
+Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('ValidationObserver', ValidationObserver)
 
 new Vue({
   router,

@@ -9,18 +9,18 @@
           <div class="text-2xl font-bold -mt-4">
             {{ restaurantName }}
           </div>
-          <div class="py-4">
+          <div class="text-xl font-medium py-4">
             <div>
               {{ description }}
             </div>
-            <div class="py-6">
-              Today Bevri shows us NUMBER exclusive dishes you can vote for and get on Monday.
+            <div class="text-xl font-medium py-6">
+              Today Bevri shows us {{ dishCount }} exclusive dishes you can vote for and get on Monday.
             </div>
             <div class="flex">
               <div class="px-4">
                 <img src="../assets/icons/map.svg" alt="">
               </div>
-              <div>
+              <div class="text-xl font-medium">
                 {{ location }}
               </div>
             </div>
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  props: ['restaurantName', 'description', 'aboutDishes', 'location', 'image']
+  props: ['restaurantName', 'description', 'aboutDishes', 'location', 'image', 'dishCount']
 }
 </script>
 

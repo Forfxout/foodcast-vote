@@ -7,7 +7,7 @@
       With love from CA
     </div>
     <div class="flex justify-center">
-      <div class="text-center">
+      <div class="text-xl font-medium text-center">
         {{ location }}<br>
         Phone: {{ phone }} <br>
         E-mail: {{ email }}

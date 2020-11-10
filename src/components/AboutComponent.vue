@@ -6,7 +6,7 @@
           When game is finished,<br>
           all participants get dishes at the best price.
         </div>
-        <div style="font-size: 22px" class="p-4">
+        <div class="p-4 text-xl font-medium">
           Steps to get your best deal:
         </div>
       </div>
@@ -15,7 +15,7 @@
           <div class="mb-6">
             <img src="../assets/icons/first-plate.svg" alt="">
           </div>
-          <div style="font-size: 22px">
+          <div class="text-xl font-medium">
             Choose your favorite dish.
           </div>
         </div>
@@ -24,7 +24,7 @@
           <div class="mb-6">
             <img src="../assets/icons/second-plate.svg" alt="">
           </div>
-          <div style="font-size: 22px">
+          <div class="text-xl font-medium">
             Place a pre-order.
           </div>
         </div>
@@ -33,7 +33,7 @@
           <div class="mb-6">
             <img src="../assets/icons/third-plate.svg" alt="">
           </div>
-          <div style="font-size: 22px" class="text-center">
+          <div class="text-xl font-medium text-center">
             Invite your friends and keep <br>
             watching the price drops.
           </div>

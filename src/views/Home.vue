@@ -1,10 +1,10 @@
 <template>
   <div>
     <div>
-      <HeaderComponent />
+      <HeaderComponent/>
     </div>
     <div>
-      <AboutComponent />
+      <AboutComponent/>
     </div>
     <div>
       <WeeksRestaurantComponent
@@ -12,11 +12,16 @@
         :description="restaurantInformation.description"
         :location="restaurantInformation.location"
         :image="restaurantInformation.image"
+        :dishCount="dishCount"
       />
     </div>
-    <div v-for="(dish, index) in dishes" :key="index">
+    <div class="text-center text-3xl font-bold pt-6" id="chooseDishes">
+      Let's choose the dish you want to get!
+    </div>
+    <div class="flex flex-wrap w-full px-64">
       <DishComponent
-        :dishName="dish.dishName"
+        v-for="(dish, index) in dishes" :key="index"
+        :dishName="dish.name"
         :restaurantLocation="dish.by"
         restaurantImage="dish.image"
         :left="dish.left"
@@ -24,10 +29,11 @@
         :price="dish.price"
         :stock="dish.stock"
         :cost="dish.cost"
+        class="p-12 w-1/2"
       />
     </div>
     <div class="mb-12">
-      <PopularQuestionsComponent />
+      <PopularQuestionsComponent/>
     </div>
     <div>
       <FooterComponent
@@ -35,6 +41,9 @@
         :phone="information.phone"
         :email="information.email"
       />
+    </div>
+    <div>
+      <OrderComponent/>
     </div>
   </div>
 </template>
@@ -46,6 +55,7 @@ import WeeksRestaurantComponent from '@/components/WeeksRestaurantComponent'
 import DishComponent from '@/components/DishComponent'
 import PopularQuestionsComponent from '@/components/PopularQuestionsComponent'
 import FooterComponent from '@/components/FooterComponent'
+import OrderComponent from '@/components/OrderComponent'
 
 export default {
   components: {
@@ -54,13 +64,15 @@ export default {
     WeeksRestaurantComponent,
     DishComponent,
     PopularQuestionsComponent,
-    FooterComponent
+    FooterComponent,
+    OrderComponent
   },
   data () {
     return {
       information: [],
       restaurantInformation: [],
-      dishes: []
+      dishes: [],
+      dishCount: 0
     }
   },
   methods: {
@@ -89,6 +101,7 @@ export default {
       } catch (e) {
 
       }
+      this.dishCount = Object.keys(result.data.dishes).length
       this.dishes = result.data.dishes
     }
   },
@@ -96,7 +109,6 @@ export default {
     await this.getInformation()
     await this.getRestaurantInformation()
     await this.getRestaurantDishes()
-    console.log(this.dishes)
   }
 }
 
