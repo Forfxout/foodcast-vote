@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="font-futura">
     <router-view />
   </div>
 </template>

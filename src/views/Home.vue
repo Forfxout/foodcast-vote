@@ -1,26 +1,40 @@
 <template>
   <div>
     <div>
-      <HeaderComponent/>
+      <HeaderComponent />
     </div>
     <div>
-      <AboutComponent/>
+      <AboutComponent />
     </div>
     <div>
-      <WeeksRestaurantComponent :restaurantName="restaurantInformation.name"
-                                :description="restaurantInformation.description"
-                                :location="restaurantInformation.location" :image="restaurantInformation.image"/>
+      <WeeksRestaurantComponent
+        :restaurantName="restaurantInformation.name"
+        :description="restaurantInformation.description"
+        :location="restaurantInformation.location"
+        :image="restaurantInformation.image"
+      />
     </div>
     <div v-for="(dish, index) in dishes" :key="index">
-      <DishComponent :dishName="dish.dishName" :restaurantLocation="dish.by" restaurantImage="dish.image"
-                     :left="dish.left" :step="dish.step" :price="dish.price" :stock="dish.stock"
-                     :cost="dish.cost"/>
+      <DishComponent
+        :dishName="dish.dishName"
+        :restaurantLocation="dish.by"
+        restaurantImage="dish.image"
+        :left="dish.left"
+        :step="dish.step"
+        :price="dish.price"
+        :stock="dish.stock"
+        :cost="dish.cost"
+      />
     </div>
     <div class="mb-12">
-      <PopularQuestionsComponent/>
+      <PopularQuestionsComponent />
     </div>
     <div>
-      <FooterComponent :location="information.location" :phone="information.phone" :email="information.email"/>
+      <FooterComponent
+        :location="information.location"
+        :phone="information.phone"
+        :email="information.email"
+      />
     </div>
   </div>
 </template>
@@ -89,5 +103,4 @@ export default {
 </script>
 
 <style>
-
 </style>

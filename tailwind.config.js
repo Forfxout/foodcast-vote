@@ -8,7 +8,11 @@ module.exports = {
     './src/**/*.vue'
   ],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        futura: ['Futura', 'Times New Roman']
+      }
+    }
   },
   variants: {},
   plugins: []
