@@ -17,7 +17,7 @@
       <div>
         <CounterComponent/>
       </div>
-      <button class="font-bold" v-scroll-to="'#chooseDishes'">Start playing</button>
+      <button class="font-bold focus:outline-none" v-scroll-to="'#chooseDishes'">Start playing</button>
     </div>
   </div>
 </template>

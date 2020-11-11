@@ -21,7 +21,7 @@
                 <img src="../assets/icons/map.svg" alt="">
               </div>
               <div class="text-xl font-medium">
-                {{ location }}
+                {{ location }} (<a style="color: #FF5D2E" target="_blank" :href="yelp">Yelp</a>)
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  props: ['restaurantName', 'description', 'aboutDishes', 'location', 'image', 'dishCount']
+  props: ['restaurantName', 'description', 'aboutDishes', 'location', 'image', 'dishCount', 'yelp']
 }
 </script>
 

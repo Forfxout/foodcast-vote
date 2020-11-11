@@ -13,6 +13,7 @@
         :location="restaurantInformation.location"
         :image="restaurantInformation.image"
         :dishCount="dishCount"
+        :yelp="restaurantInformation.yelp"
       />
     </div>
     <div class="text-center text-3xl font-bold pt-6" id="chooseDishes">
@@ -20,16 +21,24 @@
     </div>
     <div class="flex flex-wrap w-full px-64">
       <DishComponent
+        class="p-12 w-1/2"
         v-for="(dish, index) in dishes" :key="index"
+        :dishId="dish._id"
         :dishName="dish.name"
+        :description="dish.description"
         :restaurantLocation="dish.by"
-        restaurantImage="dish.image"
+        :dishImage="dish.image"
         :left="dish.left"
         :step="dish.step"
-        :price="dish.price"
+        :max="dish.max"
         :stock="dish.stock"
+        :min="dish.min"
         :cost="dish.cost"
-        class="p-12 w-1/2"
+        :instagram="dish.links.instagram"
+        :facebook="dish.links.facebook"
+        :linkedin="dish.links.linkedin"
+        :twitter="dish.links.twitter"
+        @selectedDish="selectedDish"
       />
     </div>
     <div class="mb-12">
@@ -43,7 +52,7 @@
       />
     </div>
     <div>
-      <OrderComponent/>
+      <OrderComponent></OrderComponent>
     </div>
   </div>
 </template>
@@ -56,6 +65,7 @@ import DishComponent from '@/components/DishComponent'
 import PopularQuestionsComponent from '@/components/PopularQuestionsComponent'
 import FooterComponent from '@/components/FooterComponent'
 import OrderComponent from '@/components/OrderComponent'
+import { mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -76,6 +86,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('order', ['ADD_DISH']),
     async getInformation () {
       let result
       try {
@@ -103,6 +114,11 @@ export default {
       }
       this.dishCount = Object.keys(result.data.dishes).length
       this.dishes = result.data.dishes
+      // result.data.dishes.links.forEach(element => console.log(element))
+      console.log(result.data.dishes.links)
+    },
+    selectedDish (data) {
+      this.ADD_DISH(data)
     }
   },
   async mounted () {
@@ -111,7 +127,6 @@ export default {
     await this.getRestaurantDishes()
   }
 }
-
 </script>
 
 <style>

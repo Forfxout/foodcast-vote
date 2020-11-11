@@ -2,36 +2,36 @@
   <div>
     <div class="flex flex-col">
       <div>
-        <DishPictureComponent/>
+        <DishPictureComponent :dishName="dishName" :dishDescription="description" :dishImage="dishImage"/>
       </div>
-      <div class="flex flex-col p-6">
+      <div class="flex flex-col p-2">
         <div class="text-2xl font-bold pb-2"></div>
-        <div class="flex flex-col">
-          <div class="text-2xl">
+        <div class="flex flex-col h-24">
+          <div class="text-2xl font-semibold">
             {{ dishName }}
           </div>
           <div class="flex justify-between">
-            <div class="text-sm">
-              {{ restaurantLocation }}
+            <div class="text-lg">
+              by {{ restaurantLocation }}
             </div>
             <div class="flex">
               <div class="px-1">
-                <a href="">
+                <a :href="instagram" target="_blank">
                   <img src="../assets/icons/social/instagram.svg" alt=""/>
                 </a>
               </div>
               <div class="px-1">
-                <a href="">
+                <a :href="facebook" target="_blank">
                   <img src="../assets/icons/social/facebook.svg" alt=""/>
                 </a>
               </div>
               <div class="px-1">
-                <a href="">
+                <a :href="linkedin" target="_blank">
                   <img src="../assets/icons/social/linkedin.svg" alt=""/>
                 </a>
               </div>
               <div class="px-1">
-                <a href="">
+                <a :href="twitter" target="_blank">
                   <img src="../assets/icons/social/twitter.svg" alt=""/>
                 </a>
               </div>
@@ -41,16 +41,16 @@
         <div class="pt-10">
           <div class="flex justify-between">
             <div>
-              <span> $ {{ minPrice.toFixed(2) }} </span>
+              <span> $ {{ min.toFixed(2) }} </span>
             </div>
             <div>
-              <span> $ {{ price.toFixed(2) }} </span>
+              <span> $ {{ max.toFixed(2) }} </span>
             </div>
           </div>
           <vue-slider
             v-model="cost"
-            :min="minPrice"
-            :max="price"
+            :min="min"
+            :max="max"
             :tooltip="'always'"
             :disabled="true"
           >
@@ -69,7 +69,7 @@
             </div>
           </div>
           <div class="flex justify-center items-center">
-            <div class="flex flex-col px-2 text-sm">
+            <div class="flex flex-col px-2 text-sm leading-4">
               <div>{{ left }} of {{ stock }}</div>
               <div>plates left</div>
             </div>
@@ -79,7 +79,7 @@
           </div>
         </div>
         <div class="flex justify-center items-center text-white text-2xl pt-2">
-          <button class="btn-buy">Buy</button>
+          <button class="btn-buy focus:outline-none" @click="selectedDish">Buy</button>
         </div>
         <div class="flex justify-center items-center py-2 text-sm">
           * 1 vote = ${{ step }}
@@ -96,18 +96,27 @@ import 'vue-slider-component/theme/default.css'
 import DishCounterComponent from '../components/DishCounterComponent.vue'
 
 export default {
-  props: ['dishName', 'restaurantLocation', 'restaurantImage', 'left', 'step', 'price', 'stock', 'cost'],
+  props: ['dishId', 'dishName', 'restaurantLocation', 'description', 'dishImage', 'left', 'step', 'max', 'stock', 'min', 'cost', 'instagram', 'facebook', 'linkedin', 'twitter'],
   components: {
     DishPictureComponent,
     VueSlider,
     DishCounterComponent
   },
   data () {
-    return {}
+    return {
+      showModal: false
+    }
   },
-  computed: {
-    minPrice () {
-      return this.price - (this.stock * this.step)
+  methods: {
+    selectedDish () {
+      this.$emit('selectedDish', {
+        dishId: this.dishId,
+        dishName: this.dishName,
+        restaurantLocation: this.restaurantLocation,
+        dishImage: this.dishImage,
+        cost: this.cost,
+        triggerModal: true
+      })
     }
   }
 }

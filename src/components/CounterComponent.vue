@@ -37,7 +37,7 @@
       <div class="div-line  px-2"></div>
     </div>
     <div class="flex flex-col items-center">
-      <div class="time-label">
+      <div class="time-label w-16">
         {{ seconds }}
       </div>
       <div class="relative">
@@ -53,10 +53,10 @@ import moment from 'moment-timezone'
 export default {
   data () {
     return {
-      days: '',
-      hours: '',
-      minutes: '',
-      seconds: ''
+      days: '--',
+      hours: '--',
+      minutes: '--',
+      seconds: '--'
     }
   },
   methods: {

@@ -17,7 +17,7 @@
       <div>:</div>
     </div>
     <div class="flex flex-col items-center">
-      <div class="time-label">
+      <div class="time-label w-4">
         {{ seconds }}
       </div>
     </div>
