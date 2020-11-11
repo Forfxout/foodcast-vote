@@ -16,13 +16,14 @@
         :yelp="restaurantInformation.yelp"
       />
     </div>
-    <div class="text-center text-3xl font-bold pt-6" id="chooseDishes">
+    <div class="text-center text-3xl pt-6" id="chooseDishes">
       Let's choose the dish you want to get!
     </div>
     <div class="flex flex-wrap w-full px-64">
       <DishComponent
         class="p-12 w-1/2"
         v-for="(dish, index) in dishes" :key="index"
+        :active="getDishes.map(x => x.dishId).includes(dish._id)"
         :dishId="dish._id"
         :dishName="dish.name"
         :description="dish.description"
@@ -51,9 +52,17 @@
         :email="information.email"
       />
     </div>
-    <div>
-      <OrderComponent></OrderComponent>
-    </div>
+
+    <fade-transition mode="out-in" :duration="100">
+      <div
+        v-if="modals.order && getDishes.length"
+        class="order-layout fixed top-0 left-0 w-full h-screen z-50"
+      >
+        <div class="fixed order-modal">
+          <OrderComponent @close="modals.order = false"></OrderComponent>
+        </div>
+      </div>
+    </fade-transition>
   </div>
 </template>
 
@@ -65,7 +74,7 @@ import DishComponent from '@/components/DishComponent'
 import PopularQuestionsComponent from '@/components/PopularQuestionsComponent'
 import FooterComponent from '@/components/FooterComponent'
 import OrderComponent from '@/components/OrderComponent'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -82,8 +91,14 @@ export default {
       information: [],
       restaurantInformation: [],
       dishes: [],
-      dishCount: 0
+      dishCount: 0,
+      modals: {
+        order: false
+      }
     }
+  },
+  computed: {
+    ...mapGetters('order', ['getDishes'])
   },
   methods: {
     ...mapMutations('order', ['ADD_DISH']),
@@ -119,6 +134,7 @@ export default {
     },
     selectedDish (data) {
       this.ADD_DISH(data)
+      this.modals.order = true
     }
   },
   async mounted () {
@@ -129,5 +145,26 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass">
+button, .btn
+  transition: .2s
+  @apply shadow-lg select-none cursor-pointer
+  &:hover
+    @apply shadow-xl
+    transform: translateY(-2px)
+    transition: .2s
+  &:focus
+    @apply outline-none
+  &:active
+    @apply shadow-md
+    transform: translateY(2px)
+    transition: .1s
+
+.order-layout
+  background: rgba(0,0,0,0.4)
+.order-modal
+  top: 50%
+  left: 50%
+  @apply w-1/2 bg-white rounded-lg z-40 shadow-lg
+  transform: translate(-50%, -50%)
 </style>

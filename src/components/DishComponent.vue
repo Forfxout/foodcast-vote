@@ -59,7 +59,7 @@
             </template>
           </vue-slider>
         </div>
-        <div class="flex justify-between items-center py-4">
+        <div class="flex font-light justify-between items-center py-4">
           <div
             class="border-2 border-black flex flex-col items-center justify-center px-4 py-1 rounded"
           >
@@ -69,19 +69,19 @@
             </div>
           </div>
           <div class="flex justify-center items-center">
-            <div class="flex flex-col px-2 text-sm leading-4">
+            <div class="flex flex-col font-light px-2 leading-4">
               <div>{{ left }} of {{ stock }}</div>
               <div>plates left</div>
             </div>
             <div>
-              <img src="../assets/icons/plate-card.svg" alt=""/>
+              <img src="../assets/icons/plate-card.svg" class="w-12 ml-2" alt=""/>
             </div>
           </div>
         </div>
         <div class="flex justify-center items-center text-white text-2xl pt-2">
-          <button class="btn-buy focus:outline-none" @click="selectedDish">Buy</button>
+          <button class="btn bg-black rounded-full w-64 py-3" :class="{ 'bg-orange': active }" @click="selectedDish">{{ active ? 'Added to Cart': 'Buy' }}</button>
         </div>
-        <div class="flex justify-center items-center py-2 text-sm">
+        <div class="flex justify-center font-light items-center py-2 text-sm">
           * 1 vote = ${{ step }}
         </div>
       </div>
@@ -96,7 +96,7 @@ import 'vue-slider-component/theme/default.css'
 import DishCounterComponent from '../components/DishCounterComponent.vue'
 
 export default {
-  props: ['dishId', 'dishName', 'restaurantLocation', 'description', 'dishImage', 'left', 'step', 'max', 'stock', 'min', 'cost', 'instagram', 'facebook', 'linkedin', 'twitter'],
+  props: ['dishId', 'dishName', 'restaurantLocation', 'description', 'active', 'dishImage', 'left', 'step', 'max', 'stock', 'min', 'cost', 'instagram', 'facebook', 'linkedin', 'twitter'],
   components: {
     DishPictureComponent,
     VueSlider,
@@ -114,6 +114,7 @@ export default {
         dishName: this.dishName,
         restaurantLocation: this.restaurantLocation,
         dishImage: this.dishImage,
+        stock: this.stock,
         cost: this.cost,
         triggerModal: true
       })
@@ -123,13 +124,6 @@ export default {
 </script>
 
 <style lang="sass">
-.btn-buy
-  background: #000000
-  border-radius: 100px
-  width: 240px
-  height: 60px
-  font-weight: bold
-
 .custom-tooltip
   font-size: 14px
   white-space: nowrap

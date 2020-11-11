@@ -1,5 +1,5 @@
 export default {
-  async makeOrder () {
-
+  async postOrder (payload) {
+    await this.http.post('/v1/orders', payload)
   }
 }

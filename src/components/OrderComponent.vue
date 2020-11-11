@@ -1,86 +1,119 @@
 <template>
-  <div class="flex flex-col pb-10">
-    <div class="flex justify-end p-4">
-      <img src="../assets/icons/cancel-button.svg" alt="">
+  <div class="flex flex-col pb-10 relative">
+    <div class="absolute btn right-0 top-0 m-4 shadow-none rounded-full">
+      <img src="../assets/icons/cancel-button.svg" @click="$emit('close')" />
     </div>
-    <div class="flex justify-center text-3xl font-bold">
-      Your order
+    <div class="flex justify-center text-4xl my-12">Your order</div>
+    <div class="flex flex-col justify-center px-10">
+      <fade-transition group mode="out-in" class="mb-4">
+        <SelectedDishComponent
+          v-for="(dish, index) in getDishes"
+          :key="index"
+          :dishId="dish._id"
+          :dishName="dish.dishName"
+          :dishStock="dish.stock"
+          :restaurantLocation="dish.restaurantLocation"
+          :dishCost="dish.cost"
+          :dishImage="dish.dishImage"
+          @update:price="updateTotal"
+          @remove="updateTotal"
+        />
+      </fade-transition>
+      <div class="text-lg ml-auto mx-16 mb-12"><span class="font-light">Total: </span>{{ totalPrice }}$</div>
     </div>
-    <div class="flex flex-col justify-center">
-      <SelectedDishComponent v-for="dish in getDishes" :key="dish._id"
-                             :dishId="dish._id"
-                             :dishName="dish.dishName"
-                             :restaurantLocation="dish.restaurantLocation"
-                             :dishCost="dish.cost"
-                             :dishImage="dish.dishImage">
-      </SelectedDishComponent>
-    </div>
-    <div class="flex justify-end">
-      Total
-    </div>
-    <div class="input-div flex flex-col items-center">
-      <form @submit.prevent="onSubmit">
+    <div class="flex flex-col items-center w-full">
+      <form @submit.prevent="onSubmit" class="w-full submit-form px-16">
         <div>
-          <input type="text"
-                 placeholder="Your name"
-                 class="input-field"
-                 v-model.trim="username"
-                 :class="{invalid: ($v.username.$dirty && !$v.username.required)}">
+          <input
+            type="text"
+            placeholder="Your name"
+            class="input-field"
+            v-model.trim="username"
+            :class="{ invalid: $v.username.$dirty && !$v.username.required }"
+          />
           <div
-            class="text-red-500 text-center text-sm"
-            v-if="$v.username.$dirty && !$v.username.required">
+            class="text-red-500 h-6 text-center text-sm"
+            v-if="$v.username.$dirty && !$v.username.required"
+          >
             Please enter your name
           </div>
         </div>
         <div>
-          <input type="text"
-                 placeholder="Your email"
-                 class="input-field"
-                 v-model.trim="email"
-                 :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}">
+          <input
+            type="text"
+            placeholder="Your email"
+            class="input-field"
+            v-model.trim="email"
+            :class="{
+              invalid:
+                ($v.email.$dirty && !$v.email.required) ||
+                ($v.email.$dirty && !$v.email.email),
+            }"
+          />
           <div
-            class="text-red-500 text-center text-sm"
-            v-if="$v.email.$dirty && !$v.email.required">
+            class="text-red-500 h-6 text-center text-sm"
+            v-if="$v.email.$dirty && !$v.email.required"
+          >
             Please enter your email
           </div>
           <div
-            class="text-red-500 text-center text-sm"
-            v-if="$v.email.$dirty && !$v.email.email">
+            class="text-red-500 h-6 text-center text-sm"
+            v-if="$v.email.$dirty && !$v.email.email"
+          >
             Please enter a valid email
           </div>
         </div>
         <div>
-          <input type="text"
-                 placeholder="Your phone"
-                 class="input-field"
-                 v-model="phoneNumber"
-                 v-mask="'(###) ###-####'"
-                 :class="{invalid: ($v.phoneNumber.$dirty && !$v.phoneNumber.required) || ($v.phoneNumber.$dirty && !$v.phoneNumber.minLength)}">
+          <input
+            type="text"
+            placeholder="Your phone"
+            class="input-field"
+            v-model="phoneNumber"
+            v-mask="'(###) ###-####'"
+            :class="{
+              invalid:
+                ($v.phoneNumber.$dirty && !$v.phoneNumber.required) ||
+                ($v.phoneNumber.$dirty && !$v.phoneNumber.minLength),
+            }"
+          />
           <div
-            class="text-red-500 text-center text-sm"
-            v-if="$v.phoneNumber.$dirty && !$v.phoneNumber.required">
+            class="text-red-500 h-6 text-center text-sm"
+            v-if="$v.phoneNumber.$dirty && !$v.phoneNumber.required"
+          >
             Please enter your phone number
           </div>
           <div
-            class="text-red-500 text-center text-sm"
-            v-else-if="$v.phoneNumber.$dirty && !$v.phoneNumber.minLength">
+            class="text-red-500 h-6 text-center text-sm"
+            v-else-if="$v.phoneNumber.$dirty && !$v.phoneNumber.minLength"
+          >
             Please enter correct phone number
           </div>
         </div>
         <div>
-          <input type="text"
-                 placeholder="Your address for delivery"
-                 class="input-field"
-                 v-model.trim="deliveryAddress"
-                 :class="{invalid: ($v.deliveryAddress.$dirty && !$v.username.deliveryAddress)}">
+          <input
+            type="text"
+            placeholder="Your address for delivery"
+            class="input-field"
+            v-model.trim="deliveryAddress"
+            :class="{
+              invalid:
+                $v.deliveryAddress.$dirty && !$v.username.deliveryAddress,
+            }"
+          />
           <div
-            class="text-red-500 text-center text-sm"
-            v-if="$v.deliveryAddress.$dirty && !$v.deliveryAddress.required">
+            class="text-red-500 h-6 text-center text-sm"
+            v-if="$v.deliveryAddress.$dirty && !$v.deliveryAddress.required"
+          >
             Please enter your delivery address
           </div>
         </div>
         <div class="flex justify-center items-center text-white text-2xl pt-2">
-          <button class="btn-buy mt-2 focus:outline-none font-medium" type="submit">Checkout</button>
+          <button
+            class="bg-black text-white w-full py-3 rounded-full btn mt-2 font-medium"
+            type="submit"
+          >
+            Checkout
+          </button>
         </div>
       </form>
     </div>
@@ -101,7 +134,9 @@ export default {
       username: '',
       email: '',
       phoneNumber: '',
-      deliveryAddress: ''
+      deliveryAddress: '',
+      dishes: [],
+      totalPrice: 0
     }
   },
   validations: {
@@ -114,6 +149,16 @@ export default {
     ...mapGetters('order', ['getDishes'])
   },
   methods: {
+    updateTotal () {
+      setTimeout(() => {
+        const els = document.getElementsByClassName('dish-price-total')
+        let result = 0
+        for (var i = els.length; i--;) {
+          result += els[i].innerHTML.slice(2) - 0
+        }
+        this.totalPrice = result
+      }, 600)
+    },
     onSubmit () {
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -124,14 +169,11 @@ export default {
         username: this.username,
         email: this.email,
         phoneNumber: this.phoneNumber,
-        deliveryAddress: this.deliveryAddress
+        deliveryAddress: this.deliveryAddress,
+        order: this.getDishes
       }
-      console.log(userOrderData)
 
-      this.username = ''
-      this.email = ''
-      this.phoneNumber = ''
-      this.deliveryAddress = ''
+      console.log(userOrderData)
     }
   }
 }
@@ -139,19 +181,17 @@ export default {
 
 <style lang="sass" scoped>
 .input-field
-  border: 1px solid #DADADA
-  width: 250px
-  @apply rounded-full px-6 py-4 m-2
-
+  @apply rounded-full px-6 py-4 border-2 bg-white text-black w-full
+  &::placeholder
+    @apply text-black font-light
   &.invalid
-    border: 1px solid #f56565
+    @apply border-red-500
 
   &:focus
     outline: none
 
-.btn-buy
-  background: #000000
-  border-radius: 100px
-  width: 250px
-  height: 60px
+.submit-form
+  & > div
+    @apply mb-4
+
 </style>

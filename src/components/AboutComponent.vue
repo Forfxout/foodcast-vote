@@ -1,12 +1,12 @@
 <template>
-  <div class="py-6">
+  <div class="py-6 bg-gray">
     <div class="flex flex-col justify-center items-center">
       <div class="flex flex-col justify-center items-center p-8">
-        <div class="font-bold text-center text-3xl">
+        <div class="text-center text-3xl">
           When game is finished,<br>
           all participants get dishes at the best price.
         </div>
-        <div class="p-4 text-xl font-medium">
+        <div class="p-4 text-xl font-light">
           Steps to get your best deal:
         </div>
       </div>
@@ -15,7 +15,7 @@
           <div class="mb-6">
             <img src="../assets/icons/first-plate.svg" alt="">
           </div>
-          <div class="text-xl font-medium">
+          <div class="text-xl font-light">
             Choose your favorite dish.
           </div>
         </div>
@@ -24,7 +24,7 @@
           <div class="mb-6">
             <img src="../assets/icons/second-plate.svg" alt="">
           </div>
-          <div class="text-xl font-medium">
+          <div class="text-xl font-light">
             Place a pre-order.
           </div>
         </div>
@@ -33,7 +33,7 @@
           <div class="mb-6">
             <img src="../assets/icons/third-plate.svg" alt="">
           </div>
-          <div class="text-xl font-medium text-center">
+          <div class="text-xl font-light text-center">
             Invite your friends and keep <br>
             watching the price drops.
           </div>

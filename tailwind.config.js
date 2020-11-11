@@ -11,6 +11,10 @@ module.exports = {
     extend: {
       fontFamily: {
         futura: ['Futura', 'Times New Roman']
+      },
+      colors: {
+        orange: '#FF5D2E',
+        gray: '#F9F9F9'
       }
     }
   },

@@ -1,26 +1,26 @@
 <template>
   <div>
-    <div class="flex flex-col justify-center items-center">
-      <div class="font-bold text-3xl my-20">
+    <div class="flex font-light flex-col justify-center items-center">
+      <div class="text-3xl my-20 font-normal">
         This week's restaurant
       </div>
-      <div class="flex px-48">
+      <div class="flex px-48 font-light">
         <div class="flex flex-col">
-          <div class="text-2xl font-bold -mt-4">
+          <div class="text-3xl font-medium -mt-4">
             {{ restaurantName }}
           </div>
-          <div class="text-xl font-medium py-4">
-            <div>
+          <div class="text-xl py-4">
+            <div class="font-light">
               {{ description }}
             </div>
-            <div class="text-xl font-medium py-6">
+            <div class="text-xl py-6">
               Today Bevri shows us {{ dishCount }} exclusive dishes you can vote for and get on Monday.
             </div>
             <div class="flex">
               <div class="px-4">
                 <img src="../assets/icons/map.svg" alt="">
               </div>
-              <div class="text-xl font-medium">
+              <div class="text-xl">
                 {{ location }} (<a style="color: #FF5D2E" target="_blank" :href="yelp">Yelp</a>)
               </div>
             </div>
