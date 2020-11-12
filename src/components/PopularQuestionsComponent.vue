@@ -1,5 +1,5 @@
 <template>
-  <div class="py-10 px-20">
+  <div>
     <div class="flex justify-center items-center font-bold text-3xl pb-12">
       Popular questions
     </div>

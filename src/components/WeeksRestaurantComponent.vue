@@ -4,7 +4,7 @@
       <div class="text-3xl my-20 font-normal">
         This week's restaurant
       </div>
-      <div class="flex px-48 font-light">
+      <div class="flex font-light">
         <div class="flex flex-col">
           <div class="text-3xl font-medium -mt-4">
             {{ getRestaurantWeek.name }}

@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-center p-12">
+  <div class="flex justify-center my-16">
     <div class="flex flex-col items-center">
-      <div class="time-label">
+      <div class="time-label py-1">
         {{ days }}
       </div>
       <div class="relative">
@@ -9,11 +9,11 @@
       </div>
     </div>
     <div class="flex items-center">
-      <div class=" px-2"></div>
-      <div class="div-line  px-2"></div>
+      <div class="px-2"></div>
+      <div class="div-line px-2"></div>
     </div>
     <div class="flex flex-col items-center">
-      <div class="time-label">
+      <div class="time-label py-1">
         {{ hours }}
       </div>
       <div class="relative">
@@ -21,11 +21,11 @@
       </div>
     </div>
     <div class="flex items-center">
-      <div class=" px-2"></div>
-      <div class="div-line  px-2"></div>
+      <div class="px-2"></div>
+      <div class="div-line px-2"></div>
     </div>
     <div class="flex flex-col items-center">
-      <div class="time-label">
+      <div class="time-label py-1">
         {{ minutes }}
       </div>
       <div class="relative">
@@ -33,11 +33,11 @@
       </div>
     </div>
     <div class="flex items-center">
-      <div class=" px-2"></div>
-      <div class="div-line  px-2"></div>
+      <div class="px-2"></div>
+      <div class="div-line px-2"></div>
     </div>
     <div class="flex flex-col items-center">
-      <div class="time-label w-16">
+      <div class="time-label py-1">
         {{ seconds }}
       </div>
       <div class="relative">
@@ -100,14 +100,15 @@ export default {
 
 <style lang="sass" scoped>
 .time-name-label
-  font-size: 18px
   bottom: 25%
   right: 50%
   transform: translate(50%, 25%)
 
 .time-label
   top: 0
-  font-size: 60px
+
+@apply
+text-4xl
 
 .div-line
   border-left: 1px solid white
