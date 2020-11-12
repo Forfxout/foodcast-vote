@@ -53,13 +53,14 @@
             :max="max"
             :tooltip="'always'"
             :disabled="true"
+            tooltipPlacement="bottom"
           >
             <template v-slot:tooltip>
               <div class="custom-tooltip">$ {{ cost.toFixed(2) }}</div>
             </template>
           </vue-slider>
         </div>
-        <div class="flex font-light justify-between items-center py-4">
+        <div class="flex font-light justify-between items-center pt-10 pb-4">
           <div
             class="border-2 border-black flex flex-col items-center justify-center px-4 py-1 rounded"
           >
@@ -79,7 +80,10 @@
           </div>
         </div>
         <div class="flex justify-center items-center text-white text-2xl pt-2">
-          <button class="btn bg-black rounded-full w-64 py-3" :class="{ 'bg-orange': active }" @click="selectedDish">{{ active ? 'Added to Cart': 'Buy' }}</button>
+          <button :disabled="left === 0" class="btn bg-black rounded-full w-64 py-3" :class="{ 'bg-orange': active }"
+                  @click="selectedDish">
+            {{ active ? 'Added to Cart' : 'Buy' }}
+          </button>
         </div>
         <div class="flex justify-center font-light items-center py-2 text-sm">
           * 1 vote = ${{ step }}
@@ -119,8 +123,10 @@ export default {
         restaurantLocation: this.restaurantLocation,
         dishImage: this.dishImage,
         stock: this.stock,
+        left: this.left,
         cost: this.cost,
         count: 0,
+        total: 0,
         triggerModal: true
       })
     }
@@ -129,6 +135,11 @@ export default {
 </script>
 
 <style lang="sass">
+button
+  &:disabled
+    cursor: not-allowed
+    opacity: 0.75
+
 .custom-tooltip
   font-size: 14px
   white-space: nowrap

@@ -1,5 +1,5 @@
 export default {
   getRestaurantWeek: (state) => state.restaurants.week,
-  getRestaurantWeekDishes: (state) => state.restaurants.week.dishes,
+  getRestaurantWeekDishes: (state) => state.restaurants.week ? state.restaurants.week.dishes : [],
   getRestaurantsPast: (state) => state.restaurants.past
 }

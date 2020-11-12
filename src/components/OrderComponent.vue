@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col pb-10 relative">
     <div class="absolute btn right-0 top-0 m-4 shadow-none rounded-full">
-      <img src="../assets/icons/cancel-button.svg" @click="$emit('close')" />
+      <img src="../assets/icons/cancel-button.svg" @click="$emit('close')"/>
     </div>
     <div class="flex justify-center text-4xl mt-8">Your order</div>
     <div class="flex flex-col justify-center px-10">
@@ -11,10 +11,11 @@
           :key="index"
           :dishId="dish.dishId"
           :dishName="dish.dishName"
-          :dishStock="dish.stock"
+          :dishLeft="dish.left"
           :restaurantLocation="dish.restaurantLocation"
           :dishCost="dish.cost"
           :dishImage="dish.dishImage"
+          :selectedCount="dish.count"
           @update:price="updateTotal"
           @remove="updateTotal"
         />
@@ -133,7 +134,7 @@ export default {
       phoneNumber: '',
       deliveryAddress: '',
       dishes: [],
-      totalPrice: 0
+      totalPrice: this.updateTotal()
     }
   },
   validations: {
@@ -143,21 +144,17 @@ export default {
     deliveryAddress: { required }
   },
   computed: {
-    ...mapGetters('order', ['getDishes']),
+    ...mapGetters('order', ['getDishes', 'getTotalPrice']),
     ...mapGetters('restaurant', ['getRestaurantWeek'])
   },
   methods: {
     ...mapMutations('restaurant', ['SET_DISHES']),
     ...mapMutations('order', ['SET_ORDER_DISHES']),
     updateTotal () {
-      setTimeout(() => {
-        const els = document.getElementsByClassName('dish-price-total')
-        let result = 0
-        for (var i = els.length; i--;) {
-          result += els[i].innerHTML.slice(2) - 0
-        }
-        this.totalPrice = result
-      }, 600)
+      const sum = setTimeout(() => {
+        this.totalPrice = this.getDishes.map(dish => dish.total).reduce((acc, dish) => dish + acc)
+      }, 50)
+      return sum
     },
     async onSubmit () {
       if (this.$v.$invalid) {

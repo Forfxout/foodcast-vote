@@ -82,7 +82,6 @@ export default {
   data () {
     return {
       information: [],
-      dishes: [],
       dishCount: 0,
       modals: {
         order: false
@@ -114,18 +113,6 @@ export default {
       }
       this.SET_RESTAURANT_WEEK(result.data)
     },
-    async getRestaurantDishes () {
-      let result
-      try {
-        result = await this.http.get('/v1/restaurant/week')
-      } catch (e) {
-
-      }
-      this.dishCount = Object.keys(result.data.dishes).length
-      this.dishes = result.data.dishes
-      // result.data.dishes.links.forEach(element => console.log(element))
-      console.log(result.data.dishes.links)
-    },
     selectedDish (data) {
       this.ADD_DISH(data)
       this.modals.order = true
@@ -134,7 +121,6 @@ export default {
   async mounted () {
     await this.getInformation()
     await this.getRestaurantInformation()
-    await this.getRestaurantDishes()
   }
 }
 </script>

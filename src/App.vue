@@ -16,7 +16,9 @@ export default {
   },
   mounted () {
     this.$options.sockets.onmessage = (event) => {
-      this.SET_DISHES(JSON.parse(event.data))
+      if (event.data !== 'connected') {
+        this.SET_DISHES(JSON.parse(event.data))
+      }
     }
   }
 }

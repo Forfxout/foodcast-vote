@@ -6,6 +6,7 @@ export default {
     const arrayOfDishesId = state.dishes.map(dish => dish.dishId)
     const id = arrayOfDishesId.indexOf(value.id)
     state.dishes[id].count = value.count
+    state.dishes[id].total = value.total
   },
   ADD_DISH (state, value) {
     const arrayOfDishesId = state.dishes.map(dish => dish.dishId)

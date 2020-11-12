@@ -29,7 +29,8 @@
             ${{ dishCost * countOfDish }}
           </div>
           <div class="flex justify-end px-6 select-none">
-            <img src="../assets/icons/cancel-dish-button.svg" class="btn w-12 rounded-full shadow-none" alt="" @click="remove">
+            <img src="../assets/icons/cancel-dish-button.svg" class="btn w-12 rounded-full shadow-none" alt=""
+                 @click="remove">
           </div>
         </div>
       </div>
@@ -41,10 +42,10 @@
 import { mapMutations } from 'vuex'
 
 export default {
-  props: ['dishName', 'restaurantLocation', 'dishImage', 'dishCost', 'dishId', 'dishStock'],
+  props: ['dishName', 'restaurantLocation', 'dishImage', 'dishCost', 'dishId', 'dishLeft', 'selectedCount'],
   data () {
     return {
-      countOfDish: 0
+      countOfDish: this.selectedCount
     }
   },
   methods: {
@@ -58,14 +59,14 @@ export default {
       if (this.countOfDish > 0) {
         this.countOfDish--
         this.$emit('update:price', { id: this.dishId, total: this.countOfDish * this.dishCost })
-        this.SET_DISHES_COUNT({ id: this.dishId, count: this.countOfDish })
+        this.SET_DISHES_COUNT({ id: this.dishId, count: this.countOfDish, total: this.countOfDish * this.dishCost })
       }
     },
     countPlus () {
-      if (this.countOfDish < this.$props.dishStock) {
+      if (this.countOfDish < this.$props.dishLeft) {
         this.countOfDish++
         this.$emit('update:price', { id: this.dishId, total: this.countOfDish * this.dishCost })
-        this.SET_DISHES_COUNT({ id: this.dishId, count: this.countOfDish })
+        this.SET_DISHES_COUNT({ id: this.dishId, count: this.countOfDish, total: this.countOfDish * this.dishCost })
       }
     }
   }
