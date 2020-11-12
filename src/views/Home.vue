@@ -7,14 +7,7 @@
       <AboutComponent/>
     </div>
     <div>
-      <WeeksRestaurantComponent
-        :restaurantName="restaurantInformation.name"
-        :description="restaurantInformation.description"
-        :location="restaurantInformation.location"
-        :image="restaurantInformation.image"
-        :dishCount="dishCount"
-        :yelp="restaurantInformation.yelp"
-      />
+      <WeeksRestaurantComponent :dishCount="dishCount"/>
     </div>
     <div class="text-center text-3xl pt-6" id="chooseDishes">
       Let's choose the dish you want to get!
@@ -22,7 +15,7 @@
     <div class="flex flex-wrap w-full px-64">
       <DishComponent
         class="p-12 w-1/2"
-        v-for="(dish, index) in dishes" :key="index"
+        v-for="(dish, index) in getRestaurantWeekDishes" :key="index"
         :active="getDishes.map(x => x.dishId).includes(dish._id)"
         :dishId="dish._id"
         :dishName="dish.name"
@@ -89,7 +82,6 @@ export default {
   data () {
     return {
       information: [],
-      restaurantInformation: [],
       dishes: [],
       dishCount: 0,
       modals: {
@@ -98,14 +90,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('order', ['getDishes'])
+    ...mapGetters('order', ['getDishes']),
+    ...mapGetters('restaurant', ['getRestaurantWeekDishes'])
   },
   methods: {
-    ...mapMutations('order', ['ADD_DISH']),
+    ...mapMutations('order', ['ADD_DISH', 'SET_ORDER_DISHES']),
+    ...mapMutations('restaurant', ['SET_RESTAURANT_WEEK']),
     async getInformation () {
       let result
       try {
-        result = await this.http.get('http://64.225.126.215:3000/v1/info')
+        result = await this.http.get('/v1/info')
       } catch (e) {
 
       }
@@ -114,16 +108,16 @@ export default {
     async getRestaurantInformation () {
       let result
       try {
-        result = await this.http.get('http://64.225.126.215:3000/v1/restaurant/week')
+        result = await this.http.get('/v1/restaurant/week')
       } catch (e) {
 
       }
-      this.restaurantInformation = result.data
+      this.SET_RESTAURANT_WEEK(result.data)
     },
     async getRestaurantDishes () {
       let result
       try {
-        result = await this.http.get('http://64.225.126.215:3000/v1/restaurant/week')
+        result = await this.http.get('/v1/restaurant/week')
       } catch (e) {
 
       }
@@ -148,23 +142,29 @@ export default {
 <style lang="sass">
 button, .btn
   transition: .2s
+
   @apply shadow-lg select-none cursor-pointer
+
   &:hover
     @apply shadow-xl
     transform: translateY(-2px)
     transition: .2s
+
   &:focus
     @apply outline-none
+
   &:active
     @apply shadow-md
     transform: translateY(2px)
     transition: .1s
 
 .order-layout
-  background: rgba(0,0,0,0.4)
+  background: rgba(0, 0, 0, 0.4)
+
 .order-modal
   top: 50%
   left: 50%
+
   @apply w-1/2 bg-white rounded-lg z-40 shadow-lg
   transform: translate(-50%, -50%)
 </style>

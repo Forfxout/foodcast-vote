@@ -3,13 +3,13 @@
     <div class="absolute btn right-0 top-0 m-4 shadow-none rounded-full">
       <img src="../assets/icons/cancel-button.svg" @click="$emit('close')" />
     </div>
-    <div class="flex justify-center text-4xl my-12">Your order</div>
+    <div class="flex justify-center text-4xl mt-8">Your order</div>
     <div class="flex flex-col justify-center px-10">
       <fade-transition group mode="out-in" class="mb-4">
         <SelectedDishComponent
           v-for="(dish, index) in getDishes"
           :key="index"
-          :dishId="dish._id"
+          :dishId="dish.dishId"
           :dishName="dish.dishName"
           :dishStock="dish.stock"
           :restaurantLocation="dish.restaurantLocation"
@@ -95,10 +95,7 @@
             placeholder="Your address for delivery"
             class="input-field"
             v-model.trim="deliveryAddress"
-            :class="{
-              invalid:
-                $v.deliveryAddress.$dirty && !$v.username.deliveryAddress,
-            }"
+            :class="{ invalid: $v.deliveryAddress.$dirty && !$v.deliveryAddress.required }"
           />
           <div
             class="text-red-500 h-6 text-center text-sm"
@@ -123,7 +120,7 @@
 <script>
 import SelectedDishComponent from '@/components/SelectedDishComponent'
 import { email, required, minLength } from 'vuelidate/lib/validators'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -146,9 +143,12 @@ export default {
     deliveryAddress: { required }
   },
   computed: {
-    ...mapGetters('order', ['getDishes'])
+    ...mapGetters('order', ['getDishes']),
+    ...mapGetters('restaurant', ['getRestaurantWeek'])
   },
   methods: {
+    ...mapMutations('restaurant', ['SET_DISHES']),
+    ...mapMutations('order', ['SET_ORDER_DISHES']),
     updateTotal () {
       setTimeout(() => {
         const els = document.getElementsByClassName('dish-price-total')
@@ -159,21 +159,23 @@ export default {
         this.totalPrice = result
       }, 600)
     },
-    onSubmit () {
+    async onSubmit () {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
-
       const userOrderData = {
-        username: this.username,
+        restaurantId: this.getRestaurantWeek.id,
+        phone: this.phoneNumber,
         email: this.email,
-        phoneNumber: this.phoneNumber,
-        deliveryAddress: this.deliveryAddress,
-        order: this.getDishes
+        address: this.deliveryAddress,
+        name: this.username,
+        order: this.getDishes.map(dish => ({ id: dish.dishId, count: dish.count }))
       }
-
-      console.log(userOrderData)
+      const result = await this.http.post('/v1/orders', userOrderData)
+      this.SET_DISHES(result.data)
+      this.SET_ORDER_DISHES([])
+      this.$swal(`Thank you for your order price is $${this.totalPrice}`)
     }
   }
 }

@@ -1,5 +1,6 @@
 <template>
-  <div class="flex justify-center text-white relative" :style="'background-image: url(' + dishImage + ')'" @mouseover="hover = true"
+  <div class="flex justify-center text-white relative" style="background-repeat: no-repeat; background-size: cover"
+       :style="'background-image: url(' + dishImage + ')'" @mouseover="hover = true"
        @mouseleave="hover = false">
     <div class="picture-div relative"></div>
     <fade-transition mode="out-in">
@@ -30,8 +31,6 @@ export default {
 
 <style lang="sass" scoped>
 .picture-div
-  background-repeat: no-repeat
-  background-size: cover
   height: 30vh
   width: 100%
 

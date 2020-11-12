@@ -94,6 +94,7 @@ import DishPictureComponent from '@/components/DishPictureComponent'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import DishCounterComponent from '../components/DishCounterComponent.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   props: ['dishId', 'dishName', 'restaurantLocation', 'description', 'active', 'dishImage', 'left', 'step', 'max', 'stock', 'min', 'cost', 'instagram', 'facebook', 'linkedin', 'twitter'],
@@ -107,6 +108,9 @@ export default {
       showModal: false
     }
   },
+  computed: {
+    ...mapGetters('restaurant', ['getRestaurantWeekDishes'])
+  },
   methods: {
     selectedDish () {
       this.$emit('selectedDish', {
@@ -116,6 +120,7 @@ export default {
         dishImage: this.dishImage,
         stock: this.stock,
         cost: this.cost,
+        count: 0,
         triggerModal: true
       })
     }

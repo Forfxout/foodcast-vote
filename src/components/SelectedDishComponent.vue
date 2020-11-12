@@ -5,10 +5,10 @@
         <div class="flex w-4/5">
           <div class="w-32 bg-cover" :style="'background-image: url(' + dishImage +')'"></div>
           <div class="flex flex-col justify-start p-4 w-4/5">
-            <div class="font-semibold text-xl">
+            <div class="font-semibold text-sm">
               {{ dishName }}
             </div>
-            <div class="font-medium">
+            <div class="font-light">
               by {{ restaurantLocation }}
             </div>
           </div>
@@ -49,6 +49,7 @@ export default {
   },
   methods: {
     ...mapMutations('order', ['REMOVE_DISH']),
+    ...mapMutations('order', ['SET_DISHES_COUNT']),
     remove () {
       this.$emit('remove')
       this.REMOVE_DISH(this.dishId)
@@ -57,12 +58,14 @@ export default {
       if (this.countOfDish > 0) {
         this.countOfDish--
         this.$emit('update:price', { id: this.dishId, total: this.countOfDish * this.dishCost })
+        this.SET_DISHES_COUNT({ id: this.dishId, count: this.countOfDish })
       }
     },
     countPlus () {
       if (this.countOfDish < this.$props.dishStock) {
         this.countOfDish++
         this.$emit('update:price', { id: this.dishId, total: this.countOfDish * this.dishCost })
+        this.SET_DISHES_COUNT({ id: this.dishId, count: this.countOfDish })
       }
     }
   }
