@@ -1,38 +1,40 @@
 <template>
-  <div class="flex py-4 main border-b flex-col">
-    <div class="flex items-center">
-      <div class="flex w-full justify-between">
-        <div class="flex w-4/5">
-          <div class="w-32 bg-cover" :style="'background-image: url(' + dishImage +')'"></div>
-          <div class="flex flex-col justify-start p-4 w-4/5">
-            <div class="font-semibold text-sm">
+  <div class="flex py-4 main border-b">
+    <div class="flex flex-col">
+      <div class="w-20 h-20 bg-cover" :style="'background-image: url(' + dishImage +')'"></div>
+      <div class="flex items-center mr-2 w-20">
+        <div class="select-none">
+          <img src="../assets/icons/count-minus.svg" class="w-8 btn rounded-full shadow-none" @click="countMinus">
+        </div>
+        <div class="font-medium text-2xl w-8 flex justify-center mx-2">
+          {{ countOfDish }}
+        </div>
+        <div>
+          <img src="../assets/icons/count-plus.svg" class="w-8 btn rounded-full shadow-none" @click="countPlus">
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col items-center justify-center">
+      <div class="flex items-center">
+        <div class="w-64 h-20">
+          <div class="flex flex-col">
+            <div class="text-sm">
               {{ dishName }}
             </div>
-            <div class="font-light">
+            <div class="text-sm font-light">
               by {{ restaurantLocation }}
             </div>
           </div>
         </div>
-        <div class="flex w-1/2 items-center">
-          <div class="flex items-center mr-2">
-            <div class="select-none">
-              <img src="../assets/icons/count-minus.svg" class="w-12 btn rounded-full shadow-none" @click="countMinus">
-            </div>
-            <div class="font-medium text-2xl w-16 flex justify-center mx-2">
-              {{ countOfDish }}
-            </div>
-            <div>
-              <img src="../assets/icons/count-plus.svg" class="w-12 btn rounded-full shadow-none" @click="countPlus">
-            </div>
-          </div>
-          <div class="font-medium text-2xl w-32 dish-price-total text-center">
-            ${{ dishCost * countOfDish }}
-          </div>
-          <div class="flex justify-end px-6 select-none">
-            <img src="../assets/icons/cancel-dish-button.svg" class="btn w-12 rounded-full shadow-none" alt=""
+        <div class="w-1/4">
+          <div class="select-none absolute right-0 pr-4">
+            <img src="../assets/icons/cancel-dish-button.svg" class="btn w-8 rounded-full shadow-none" alt=""
                  @click="remove">
           </div>
         </div>
+      </div>
+      <div class="font-medium text-2xl w-8 dish-price-total">
+        ${{ dishCost * countOfDish }}
       </div>
     </div>
   </div>

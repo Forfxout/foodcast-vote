@@ -1,16 +1,16 @@
 <template>
-  <div class="main-div flex items-center text-white">
+  <div class="main-div flex items-center justify-center text-white">
     <div class="relative flex flex-col items-center z-10">
       <div class="p-12">
         <div class="-mt-24">
           <img width="194" height="68" src="../assets/images/food-logo.png" alt="">
         </div>
       </div>
-      <div class="flex flex-col items-center px-6 -mt-6" style="font-size: 28px">
-        <div class="text-center font-semibold">
+      <div class="flex flex-col items-center px-6 -mt-8" style="font-size: 28px">
+        <div class="text-center font-semibold sm:text-4xl">
           Every week we launch a game
         </div>
-        <div class="text-center text-xl font-light">
+        <div class="text-center text-xl font-light sm:text-3xl sm:px-32">
           when we choose six dishes that famous restaurants provide us exclusively. Whenever somebody places an order,
           the price drops in real-time. The more you order - the lower the price for all buyers (and for previous ones
           too)!
@@ -19,7 +19,7 @@
       <div>
         <CounterComponent/>
       </div>
-      <button class="tracking-wider text-xl focus:outline-none" v-scroll-to="'#chooseDishes'">Start playing
+      <button class="tracking-wider text-xl focus:outline-none mt-10" v-scroll-to="'#chooseDishes'">Start playing
       </button>
     </div>
   </div>

@@ -6,10 +6,10 @@
     <fade-transition mode="out-in">
       <div v-if="hover" class="absolute z-10 w-full">
         <div class="absolute top-0 shadow-bg px-6 py-6 flex flex-col justify-center items-center text-center">
-          <div class="text-2xl">
+          <div class="text-xl lg:text-2xl">
             {{ dishName }}
           </div>
-          <div class="text-xl font-light">
+          <div class="text-lg font-light lg:text-xl">
             {{ dishDescription }}
           </div>
         </div>

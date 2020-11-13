@@ -7,11 +7,11 @@
       <div class="flex flex-col p-2">
         <div class="text-2xl font-bold pb-2"></div>
         <div class="flex flex-col h-24">
-          <div class="text-2xl font-semibold">
+          <div class="text-2xl">
             {{ dishName }}
           </div>
-          <div class="flex justify-between">
-            <div class="text-lg">
+          <div class="flex justify-between py-2">
+            <div class="text-sm lg:text-lg">
               by {{ restaurantLocation }}
             </div>
             <div class="flex">
@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        <div class="pt-10">
+        <div class="pt-8">
           <div class="flex justify-between">
             <div>
               <span> $ {{ min.toFixed(2) }} </span>
@@ -85,7 +85,7 @@
             {{ active ? 'Added to Cart' : 'Buy' }}
           </button>
         </div>
-        <div class="flex justify-center font-light items-center py-2 text-sm">
+        <div class="flex justify-center font-light items-center pt-2 text-sm">
           * 1 vote = ${{ step }}
         </div>
       </div>

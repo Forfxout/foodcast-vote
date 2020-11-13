@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-center my-16">
+  <div class="flex justify-center my-16 sm:text-lg">
     <div class="flex flex-col items-center">
-      <div class="time-label py-1">
+      <div class="time-label py-1 text-4xl sm:text-5xl">
         {{ days }}
       </div>
       <div class="relative">
@@ -9,11 +9,12 @@
       </div>
     </div>
     <div class="flex items-center">
-      <div class="px-2"></div>
-      <div class="div-line px-2"></div>
+      <div class="px-3"></div>
+      <div class="div-line"></div>
+      <div class="px-3"></div>
     </div>
     <div class="flex flex-col items-center">
-      <div class="time-label py-1">
+      <div class="time-label py-1 text-4xl sm:text-5xl">
         {{ hours }}
       </div>
       <div class="relative">
@@ -21,11 +22,12 @@
       </div>
     </div>
     <div class="flex items-center">
-      <div class="px-2"></div>
-      <div class="div-line px-2"></div>
+      <div class="px-3"></div>
+      <div class="div-line"></div>
+      <div class="px-3"></div>
     </div>
     <div class="flex flex-col items-center">
-      <div class="time-label py-1">
+      <div class="time-label py-1 text-4xl sm:text-5xl">
         {{ minutes }}
       </div>
       <div class="relative">
@@ -33,11 +35,12 @@
       </div>
     </div>
     <div class="flex items-center">
-      <div class="px-2"></div>
-      <div class="div-line px-2"></div>
+      <div class="px-3"></div>
+      <div class="div-line"></div>
+      <div class="px-3"></div>
     </div>
     <div class="flex flex-col items-center">
-      <div class="time-label py-1">
+      <div class="time-label py-1 text-4xl sm:text-5xl">
         {{ seconds }}
       </div>
       <div class="relative">
@@ -106,9 +109,6 @@ export default {
 
 .time-label
   top: 0
-
-@apply
-text-4xl
 
 .div-line
   border-left: 1px solid white
