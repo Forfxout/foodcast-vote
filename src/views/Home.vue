@@ -50,7 +50,7 @@
         v-if="modals.order && getDishes.length"
         class="order-layout fixed top-0 left-0 w-full h-screen z-50"
       >
-        <div class="fixed order-modal w-full">
+        <div class="fixed order-modal w-full md:w-3/5">
           <OrderComponent @close="modals.order = false"></OrderComponent>
         </div>
       </div>

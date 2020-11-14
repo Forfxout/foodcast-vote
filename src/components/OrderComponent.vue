@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col pb-10 relative">
+  <div class="flex flex-col pb-10 relative h-screen lg:h-full lg:overflow-auto modal-scroll">
     <div class="absolute btn right-0 top-0 m-4 shadow-none rounded-full">
       <img src="../assets/icons/cancel-button.svg" @click="$emit('close')"/>
     </div>
@@ -152,7 +152,7 @@ export default {
     ...mapMutations('order', ['SET_ORDER_DISHES']),
     updateTotal () {
       const sum = setTimeout(() => {
-        this.totalPrice = this.getDishes.map(dish => dish.total).reduce((acc, dish) => dish + acc)
+        this.totalPrice = this.getDishes.map(dish => dish.total).reduce((acc, dish) => dish + acc, 0)
       }, 50)
       return sum
     },
@@ -193,4 +193,6 @@ export default {
   & > div
     @apply mb-4
 
+.modal-scroll
+  overflow-y: auto
 </style>
