@@ -18,7 +18,7 @@ import 'vue-slider-component/theme/default.css'
 
 Vue.config.productionTip = false
 
-const HTTPClient = axios.create({ baseURL: 'http://64.225.126.215:3000' })
+const HTTPClient = axios.create({ baseURL: process.env.VUE_APP_API_URL })
 
 Vue.prototype.http = HTTPClient
 store.http = HTTPClient
@@ -27,7 +27,7 @@ Vue.use(VueScrollTo)
 Vue.use(Transitions)
 Vue.use(Vuelidate)
 Vue.use(VueMask)
-Vue.use(VueNativeSock, `ws://${'64.225.126.215:3000'}/echo`)
+Vue.use(VueNativeSock, process.env.VUE_APP_WSS_URL)
 Vue.use(VueSwal)
 
 new Vue({
