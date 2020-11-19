@@ -42,7 +42,7 @@ export default {
     async getInformation () {
       let result
       try {
-        result = await this.http.get('http://64.225.126.215:3000/v1/info')
+        result = await this.http.get('/v1/info')
       } catch (e) {
 
       }
