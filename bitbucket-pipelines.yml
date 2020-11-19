@@ -2,21 +2,17 @@ image: vcubus/node:latest
 
 pipelines:
   branches:
-    add_pipelines:
-      - step: &deploy
+    master:
+      - step:
           name: Deploy
-          deployment: staging
+          deployment: production
           caches:
             - yarn
           script:
-            - cp .env.$BITBUCKET_DEPLOYMENT_ENVIRONMENT .env
+            - echo VUE_APP_API_URL=$API_URL > .env
             - yarn install
             - yarn build
             - rsync -rltvz --delete --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r --no-perms -O dist/ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/$BITBUCKET_DEPLOYMENT_ENVIRONMENT
-    master:
-      - step:
-          <<: *deploy
-          deployment: production
 definitions:
   caches:
     yarn: node_modules
