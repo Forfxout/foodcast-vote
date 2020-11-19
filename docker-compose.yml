@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  change-me:
+  vote-frontend:
     build: .
     restart: always
     ports:
