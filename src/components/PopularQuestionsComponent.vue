@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="xl:w-3/4 main-div">
     <div class="flex justify-center items-center text-3xl pt-6 xl:pb-12">
       Popular questions
     </div>
@@ -14,10 +14,10 @@
       </div>
       <div class="flex flex-col text-center items-center p-3 mx-6 mb-4 border-b-2 xl:hidden">
         <div class="text-xl lg:text-2xl">
-          {{question.question}}
+          {{ question.question }}
         </div>
         <div class="font-light text-lg lg:text-xl">
-          {{question.reply}}
+          {{ question.reply }}
         </div>
       </div>
     </div>
@@ -55,6 +55,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass" scoped>
+@media screen and (min-width: 1441px)
+  .main-div
+    @apply w-3/5
 </style>

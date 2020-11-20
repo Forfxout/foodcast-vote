@@ -106,7 +106,7 @@
           </div>
         </div>
         <div class="flex justify-center items-center text-white text-2xl pt-2">
-          <button
+          <button :disabled="totalPrice === 0"
             class="bg-black text-white w-full py-3 rounded-full btn mt-2 font-medium"
             type="submit"
           >
@@ -179,6 +179,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+button
+  &:disabled
+    cursor: not-allowed
+    opacity: 0.75
+
 .input-field
   @apply rounded-full px-6 py-4 border-2 bg-white text-black w-full
   &::placeholder

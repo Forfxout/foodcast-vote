@@ -35,6 +35,10 @@
                 <div class="font-light text-xl xl:text-2xl">
                   {{ getRestaurantWeek.description }}
                 </div>
+                <div class="font-light text-xl xl:text-2xl">
+                  Today {{ getRestaurantWeek.name }} shows us {{ dishCount }} exclusive dishes you can vote for and get
+                  on Monday.
+                </div>
                 <div>
                   <div class="flex pt-4">
                     <img class="px-4" src="../assets/icons/map.svg" alt="">

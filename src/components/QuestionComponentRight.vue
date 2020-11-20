@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mr-32">
+  <div class="relative main-div">
     <img :src="require('../assets/icons/question-right.svg')" alt="" width="100%">
     <div class="flex flex-col absolute top-0 p-8">
       <div class="text-2xl font-bold">
@@ -19,5 +19,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="sass" scoped>
+@media screen and (min-width: 1441px)
+  .main-div
+    @apply mr-32
 </style>

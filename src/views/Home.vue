@@ -7,7 +7,7 @@
       <AboutComponent/>
     </div>
     <div>
-      <WeeksRestaurantComponent/>
+      <WeeksRestaurantComponent :dishCount="getRestaurantWeekDishes.length"/>
     </div>
     <div class="text-center text-3xl px-6 pt-6 xl:pb-4 xl:pt-16" id="chooseDishes">
       Let's choose the dish you want to get!
@@ -35,7 +35,7 @@
         @selectedDish="selectedDish"
       />
     </div>
-    <div class="mb-12">
+    <div class="mb-12 flex justify-center">
       <PopularQuestionsComponent/>
     </div>
     <div>

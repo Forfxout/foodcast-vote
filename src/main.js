@@ -11,12 +11,15 @@ import Vuelidate from 'vuelidate'
 import VueMask from 'v-mask'
 import VueNativeSock from 'vue-native-websocket'
 import VueSwal from 'vue-swal'
+import dotenv from 'dotenv'
+import cookie from 'vue-cookies'
 
 // CSS Entry
 import '@/assets/css/main.css'
 import 'vue-slider-component/theme/default.css'
 
 Vue.config.productionTip = false
+dotenv.config()
 
 const HTTPClient = axios.create({ baseURL: process.env.VUE_APP_API_URL })
 
@@ -29,6 +32,7 @@ Vue.use(Vuelidate)
 Vue.use(VueMask)
 Vue.use(VueNativeSock, process.env.VUE_APP_WSS_URL)
 Vue.use(VueSwal)
+Vue.use(cookie)
 
 new Vue({
   router,

@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import PastEvents from '@/views/PastEvents'
 
 Vue.use(VueRouter)
 
@@ -9,12 +7,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('@/views/Home.vue')
   },
   {
     path: '/past-events',
     name: 'PastEvents',
-    component: PastEvents
+    component: () => import('@/views/PastEvents')
+  },
+  {
+    path: '/orders/:id',
+    name: 'Orders',
+    component: () => import('@/views/OrderPanel')
   }
 ]
 
