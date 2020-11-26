@@ -40,13 +40,9 @@ export default {
   },
   methods: {
     async getInformation () {
-      let result
-      try {
-        result = await this.http.get('/v1/info')
-      } catch (e) {
-
-      }
-      this.questions = result.data.questions
+      await this.http.get('/v1/info').then(response => {
+        this.questions = response.data.questions
+      }).catch()
     }
   },
   async mounted () {

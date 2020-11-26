@@ -13,10 +13,12 @@ import VueNativeSock from 'vue-native-websocket'
 import VueSwal from 'vue-swal'
 import dotenv from 'dotenv'
 import cookie from 'vue-cookies'
+import PrettyCheckbox from 'pretty-checkbox-vue'
 
 // CSS Entry
 import '@/assets/css/main.css'
 import 'vue-slider-component/theme/default.css'
+import 'pretty-checkbox/dist/pretty-checkbox.min.css'
 
 Vue.config.productionTip = false
 dotenv.config()
@@ -33,6 +35,7 @@ Vue.use(VueMask)
 Vue.use(VueNativeSock, process.env.VUE_APP_WSS_URL)
 Vue.use(VueSwal)
 Vue.use(cookie)
+Vue.use(PrettyCheckbox)
 
 new Vue({
   router,

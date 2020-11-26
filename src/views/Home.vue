@@ -93,32 +93,24 @@ export default {
   methods: {
     ...mapMutations('order', ['ADD_DISH', 'SET_ORDER_DISHES']),
     ...mapMutations('restaurant', ['SET_RESTAURANT_WEEK']),
-    async getInformation () {
-      let result
-      try {
-        result = await this.http.get('/v1/info')
-      } catch (e) {
-
-      }
-      this.information = result.data
+    getInformation () {
+      this.http.get('/v1/info').then(response => {
+        this.information = response.data
+      }).catch()
     },
-    async getRestaurantInformation () {
-      let result
-      try {
-        result = await this.http.get('/v1/restaurant/week')
-      } catch (e) {
-
-      }
-      this.SET_RESTAURANT_WEEK(result.data)
+    getRestaurantInformation () {
+      this.http.get('/v1/restaurant/week').then(response => {
+        this.SET_RESTAURANT_WEEK(response.data)
+      }).catch(() => this.$router.push('/past-events'))
     },
     selectedDish (data) {
       this.ADD_DISH(data)
       this.modals.order = true
     }
   },
-  async mounted () {
-    await this.getInformation()
-    await this.getRestaurantInformation()
+  mounted () {
+    this.getInformation()
+    this.getRestaurantInformation()
   }
 }
 </script>

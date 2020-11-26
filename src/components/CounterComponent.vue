@@ -59,8 +59,7 @@ export default {
       days: '--',
       hours: '--',
       minutes: '--',
-      seconds: '--',
-      differentTime: 0
+      seconds: '--'
     }
   },
   methods: {
@@ -68,16 +67,15 @@ export default {
       let result
       try {
         result = await this.http.get('/v1/restaurant/week')
+        return moment.utc(result.data.ends).unix()
       } catch (e) {
-
       }
-      return moment.utc(result.data.ends).unix()
     },
     async countDownEventEnd () {
       const currentTime = moment().unix()
       const eventTime = await this.getRestaurantEndTime()
-      this.differentTime = eventTime - currentTime
-      let duration = moment.duration(this.differentTime * 1000, 'milliseconds')
+      const differentTime = eventTime - currentTime
+      let duration = moment.duration(differentTime * 1000, 'milliseconds')
       const interval = 1000
 
       setInterval(() => {
@@ -94,16 +92,10 @@ export default {
       } else {
         return time
       }
-    },
-    async checkEndEventTime () {
-      if (this.differentTime <= 0) {
-        await this.$router.push('/past-events')
-      }
     }
   },
   async mounted () {
     await this.countDownEventEnd()
-    await this.checkEndEventTime()
   }
 }
 </script>

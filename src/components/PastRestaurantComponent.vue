@@ -4,7 +4,7 @@
       <img :src="restaurantImage" alt="">
     </div>
     <div class="flex flex-col p-4">
-      <div class="text-2xl">
+      <div class="text-2xl h-12">
         {{ restaurantName }}
       </div>
       <div class="font-light text-xl py-2">

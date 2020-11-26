@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "moment-timezone": "^0.5.31",
+    "pretty-checkbox-vue": "^1.1.9",
     "register-service-worker": "^1.7.1",
     "tailwindcss": "^1.9.6",
     "v-mask": "^2.2.3",

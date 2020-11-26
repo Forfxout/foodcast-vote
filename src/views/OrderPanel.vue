@@ -1,18 +1,23 @@
 <template>
   <div>
     <div>
-    <UserOrderInformationComponent v-for="(user, index) in restaurantOrders" :key="index"
-                                   :userName="user.name"
-                                   :userEmail="user.email"
-                                   :userPhone="user.phone"
-                                   :userAddress="user.address"
-                                   :dishes="user.order"/>
+      <UserOrderInformationComponent v-for="(order, index) in restaurantOrders" :key="index"
+                                     :orderId="order._id"
+                                     :userName="order.name"
+                                     :userEmail="order.email"
+                                     :userPhone="order.phone"
+                                     :userAddress="order.address"
+                                     :dishes="order.order"
+                                     :orderApprovedStatus="order.approved"
+                                     :orderCompletedStatus="order.completed"
+                                     :count="index + 1"/>
     </div>
   </div>
 </template>
 
 <script>
 import UserOrderInformationComponent from '@/components/UserOrderInformationComponent'
+
 export default {
   components: {
     UserOrderInformationComponent

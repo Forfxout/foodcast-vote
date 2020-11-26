@@ -3,9 +3,9 @@
     <div class="flex justify-center text-3xl mt-8">
       Past Events
     </div>
-    <div class="flex flex-wrap justify-center w-full xl:px-48">
+    <div class="flex flex-wrap justify-center mb-12 xl:px-48">
       <PastRestaurantComponent v-for="(postRestaurant, index) in getRestaurantsPast" :key="index"
-                               class="p-8 pb-0 w-1/3"
+                               class="p-8 pb-0 w-full sm:w-1/2 xl:w-1/3"
                                :restaurantId="postRestaurant.id"
                                :restaurantName="postRestaurant.name"
                                :restaurantDescription="postRestaurant.description"
@@ -15,10 +15,10 @@
                                :restaurantImage="postRestaurant.image"
                                :checkAdminAccess="adminAccess"
       />
-      <div class="fixed bottom-0 text-center w-1/2 font-light text-lg mb-8">
-        <a v-if="!adminAccess" target="_blank" class="text-orange cursor-pointer" @click="openInputKeyView">Enter admin
-          details</a>
-      </div>
+    </div>
+    <div class="admin-button w-full text-center font-light text-lg xl:block hidden mb-2">
+      <a v-if="!adminAccess" target="_blank" class="text-orange cursor-pointer" @click="openInputKeyView">Enter admin
+        details</a>
     </div>
   </div>
 </template>
@@ -65,4 +65,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.admin-button
+  position: fixed
+  bottom: 0
 </style>
